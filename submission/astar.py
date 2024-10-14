@@ -29,41 +29,58 @@ def null_heuristic(graph, u, v):
 
 
 def euclidean_dist_heuristic(graph, u, v):
-    """
-    Warm-up exercise: Implement the euclidean distance heuristic.
-
-    See README.md for exercise description.
-
-    Args:
-        graph (ExplorableGraph): Undirected graph to search.
-        u: Key for the first node to calculate from.
-        v: Key for the second node to calculate to.
-
-    Returns:
-        Euclidean distance between the u node and the v node
-        Round the result to 3 decimal places (if applicable)
-    """
-
-    # TODO: finish this function!͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-    raise NotImplementedError
+    pos_u=graph.nodes[u]['pos'];
+    pos_v=graph.nodes[v]['pos'];
+    distance=math.sqrt((pos_u[0]-pos_v[0])**2+(pos_u[1]-pos_v[1])**2);
+    return round(distance,3)
 
 
 def a_star(graph, start, goal, heuristic=euclidean_dist_heuristic) -> list:
-    """
-    Warm-up exercise: Implement A* algorithm.
 
-    See README.md for exercise description.
+    if start==goal:
+        return [];
 
-    Args:
-        graph (ExplorableGraph): Undirected graph to search.
-        start: Key for the start node.
-        goal: Key for the end node.
-        heuristic: Function to determine distance heuristic.
-            Default: euclidean_dist_heuristic.
+    queue=PriorityQueue();
+    queue.append((0,start));
+    routes={};
+    g_s={start:0};
+    f_s={start:heuristic(graph,start,goal)};
+    memo=set();
 
-    Returns:
-        The best path via A* as a list from the start to the goal node (including both).
-    """
+    while not queue.is_empty():
+        _,currentNode=queue.pop();
+    
+        ##backtracing here
+        if currentNode==goal:
+            path=[];
+            while currentNode in routes:
+                path.append(currentNode);
+                currentNode=routes[currentNode];
+            ##because the inital node has no previous node
+            path.append(start);
+            path.reverse();
+            return path
+        
+        if currentNode in memo:
+            continue;
+        memo.add(currentNode)
 
-    # TODO: finish this function!͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-    raise NotImplementedError
+        for neighbor in sorted(graph.neighbors(currentNode)):
+            new_g_s=g_s[currentNode]+graph.get_edge_weight(currentNode,neighbor);
+            if neighbor in memo:
+                continue;
+            
+            if neighbor not in g_s or new_g_s<g_s[neighbor]:
+                routes[neighbor]=currentNode;
+                g_s[neighbor]=new_g_s;
+                f_s[neighbor]=new_g_s+heuristic(graph,neighbor,goal);
+            
+            ##prevent repeated append into the priority queue
+
+            if neighbor not in [n[1] for n in queue.queue]:
+                queue.append((f_s[neighbor],neighbor))
+    return []
+
+
+  
+

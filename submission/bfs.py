@@ -6,23 +6,19 @@
 # DO NOT ADD OR REMOVE ANY IMPORTS FROM THIS FILE͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
 import math
 
-# Credits if any͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-# 1)͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-# 2)͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-# 3)͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
+# Credits if any
+# 1)
+# 2)
+# 3)
 
 def return_your_name() -> str:
     """Return your first and last name from this function as a string"""
-
-    # TODO: finish this function͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-    raise NotImplementedError
+    return "Erwei Yao"
 
 
 def breadth_first_search(graph, start, goal) -> list:
     """
     Warm-up exercise: Implement breadth-first-search.
-
-    See README.md for exercise description.
 
     Args:
         graph (ExplorableGraph): Undirected graph to search.
@@ -33,5 +29,24 @@ def breadth_first_search(graph, start, goal) -> list:
         The best path via BFS as a list from the start to the goal node (including both).
     """
 
-    # TODO: finish this function!͏︅͏︀͏︋͏︋͏󠄌͏󠄎͏󠄋͏󠄉͏󠄈͏︁
-    raise NotImplementedError
+    if start == goal:
+        return []
+    
+    # Initialize the queue and memo (using list instead of deque)
+    queue = [[start]]  # Queue is a list of paths
+    memo = set([start])  # Memo to keep track of visited nodes
+
+    # BFS loop
+    while queue:
+        path = queue.pop(0)  # Use pop(0) to simulate queue behavior
+        node = path[-1]
+
+        # Explore neighbors
+        for neighbor in sorted(graph.neighbors(node)):
+            if neighbor == goal:
+                return path + [neighbor]
+            if neighbor not in memo:
+                memo.add(neighbor)
+                queue.append(path + [neighbor])
+    
+    return []

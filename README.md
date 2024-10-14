@@ -1,102 +1,61 @@
-# Fall 2024 - CS6601 - Assignment 1
+# Optimal Path Search Algorithm Implementation
 
-## Instructor: Dr. Thomas Ploetz
+This project implements several classic search algorithms to solve pathfinding problems, focusing on calculating the optimal route between two points on a map of Romania. Search algorithms are widely used in artificial intelligence for problem-solving where solutions aren't immediately clear. The goal of this project is to compute the most efficient path while minimizing time and space costs.
 
-## Deadline: Monday, September 9th, 7:59 am EDT
+The project utilizes an undirected graph to represent the map of Romania, with an optional Atlanta graph available for a race mode. You can choose from different algorithms such as Depth-First Search, Breadth-First Search, and A* to explore and find the optimal path between two locations.
 
-#### Released: Monday, August 26th, 8:00 am EDT
-
-Search is an integral part of AI. It helps in problem solving across a wide variety of domains where a solution isn’t immediately clear. Your task is to implement several search algorithms that will calculate a route between two points in Romania while seeking to minimize time and space cost. We will be using an undirected network representing a map of Romania (and an optional Atlanta graph used for the Race!).
-
-### Table of Contents
+## Table of Contents
 - [Setup](#setup)
 - [Dependencies](#dependencies)
-- [Jupyter](#jupyter)
-- [Jupyter Tips](#jupyter-tips)
-- [Submission](#submission)
-- [Custom Tests](#custom-tests)
+- [Jupyter Notebook](#jupyter-notebook)
+- [Tips for Jupyter](#tips-for-jupyter)
+- [Testing](#testing)
+- [Visualization](#visualization)
 
-<a name="setup"/></a>
-### Setup
+## Setup
 
-Create a conda environment if you have not already. For example:
+To get started, create and activate a Conda environment. Run the following commands:
 
-```
-conda create --name a1_env python=3.9 -y
-```
+```bash
+conda create --name optimal_path_env python=3.9 -y
+conda activate optimal_path_env
 
-Activate the environment:
+If you used a different environment name, you can list all environments with conda env list and ensure the correct one is activated.
 
-```
-conda activate a1_env
-```
+Dependencies
+After activating your environment, install the required dependencies:
 
-In case you used a different environment name to create the conda environment, you can list all environments you have on your machine by running `conda env list`. You can always refer back to the instructions provided in Assignment 0 for managing conda environments.
-
-
-<a name="setup"/></a>
-### Dependencies
-
-Install the necessary libraries for this assignment after activating your conda environment and navigating to the correct directory.
-
-```
 pip install -r requirements.txt
-```
 
-<a name="jupyter"/></a>
-## Jupyter
+Jupyter Notebook
+To run the project in a Jupyter Notebook, execute:
 
-To open the Jupyter Notebook, run:
-
-```
 jupyter notebook
-```
 
-This should automatically open the `notebook.ipynb` as a Jupyter Notebook. If it doesn't automatically open, you can access the Jupyter Notebook at [http://localhost:8888](http://localhost:8888/) in your browser.
+This will open the notebook.ipynb file in your browser. If it doesn't open automatically, access it via http://localhost:8888.
 
-<a name="jupyter-tips"/></a>
-## Jupyter Tips
+Tips for Jupyter
+Here are some troubleshooting tips when using Jupyter:
 
-Hopefully, [Assignment 0](https://github.gatech.edu/omscs6601/assignment_0/) got you pretty comfortable with Jupyter or at the very least addressed the major things that you may run into during this project. That said, Jupyter can take some getting used to, so here is a compilation of some things to watch out for specifically when it comes to Jupyter in a sort-of FAQs-like style
+Kernel not starting: Ensure your virtual environment is activated before starting the notebook (conda activate optimal_path_env).
+Cell execution issues: Ensure dependent cells are run in the correct order. Use the "Run All" command if needed to execute everything sequentially.
+Unexpected variable values: Check if cells that modify variables were rerun unintentionally. Running cells in the wrong order can alter the flow of the program.
+Testing
+There are custom tests provided to validate the functionality of your implementation:
 
-**1. My Jupyter notebook does not seem to be starting up or my kernel is not starting correctly.**
+search_basic_tests.py: Runs basic tests and visualizes the Romania graph.
+search_romania_tests.py: Comprehensive tests for the Romania graph.
+search_atlanta_tests.py: Tests for the optional Atlanta graph.
 
-Ans: This probably has to do with activating virtual environments. If you followed the setup instructions exactly, then you should activate your conda environment using `conda activate <environment_name>` from the Anaconda Prompt and start Jupyter Notebook from there.
+To run a test, use:
 
-**2. I was running cell xxx when I opened up my notebook again and something or the other seems to have broken.**
-
-Ans: This is one thing that is very different between IDEs like PyCharm and Jupyter Notebook. In Jupyter, every time you open a notebook, you should run all the cells that a cell depends on before running that cell. This goes for cells that are out of order too (if cell 5 depends on values set in cell 4 and 6, you need to run 4 and 6 before 5). Using the "Run All" command and its variants (found in the "Cell" dropdown menu above) should help you when you're in a situation like this.
-
-**3. The value of a variable in one of my cells is not what I expected it to be? What could have happened?**
-
-Ans: You may have run a cell that modifies that variable too many times. Look at the "counter" example in assignment 0. First, try running `counter = 0` and then `counter += 1`. This way, when you print counter, you get counter = 1, right? Now try running `counter += 1` again, and now when you try to print the variable, you see a value of 2. This is similar to the issue from Question 2. The order in which you run the cells does affect the entire program, so be careful.
-
-<a name="submission"/></a>
-## Submission
-
-You will submit multiple files from the directory `submission` to Gradescope after following the instructions in `notebook.ipynb`.
-
-<a name="custom-tests"/></a>
-## Custom Tests
-
-There are a series of custom tests provided if you would like to run them through the terminal instead of Jupyter Notebook. They are:
-
-1. `search_basic_tests.py`: Sample basic tests, visualizes the Romania graph.
-2. `search_submission_tests_grid.py`: Visualizes the search as a grid.
-3. `search_romania_tests.py`: More comprehensive tests on the Romania graph than `search_basic_tests`.
-4. `search_atlanta_tests.py`: Tests for the Atlanta graph.
-5. `search_case_visualizer.py`: For visualizing specific failed cases of interest on the Romania graph.
-
-To run a full test, you can do something like:
-
-```
 python search_romania_tests.py
-```
 
-To run a specific test, you can do something like:
+For a specific test:
 
-```
 python search_romania_tests.py SearchRomaniaTests.test_bfs_romania
-```
 
-See the code for each test file for more detailed instructions and descriptions.
+Visualization
+
+The project includes visualization tools to help you better understand the search process on the Romania and Atlanta graphs. You can visualize the graph and the path explored by running the provided tests, making it easier to debug and analyze algorithm performance.
+
