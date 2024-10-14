@@ -47,15 +47,15 @@ search_basic_tests.py: Runs basic tests and visualizes the Romania graph.
 search_romania_tests.py: Comprehensive tests for the Romania graph.
 search_atlanta_tests.py: Tests for the optional Atlanta graph.
 
-To run a test, use:
+## To run a test, use:
 
 python search_romania_tests.py
 
-For a specific test:
+## For a specific test:
 
 python search_romania_tests.py SearchRomaniaTests.test_bfs_romania
 
-Visualization
+## Visualization
 
 The project includes visualization tools to help you better understand the search process on the Romania and Atlanta graphs. You can visualize the graph and the path explored by running the provided tests, making it easier to debug and analyze algorithm performance.
 
